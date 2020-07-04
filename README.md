@@ -1,6 +1,8 @@
 Gapless 5 &nbsp; <img src="https://ccrma.stanford.edu/~regosen/gapless5.gif" width="123" height="51">
 =========
 
+use with [my version of the Pokémon Showdown client](https://github.com/tildearrow/pokemon-showdown-client).
+
 A gapless JavaScript/CSS audio player for HTML5
 
 **PROBLEM**: There are 2 modern APIs for playing audio through the web, and both of them have problems:
