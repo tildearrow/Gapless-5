@@ -1289,32 +1289,14 @@ this.prevtrack = function (e) {
 
 this.prev = function (e) {
 	if (that.mgr.sources.length == 0) return;
-	if ( readyToRemake() == true )
-	{
-		// jump to start of track that's in a new position
-		// at the head of the re-made list.
-		that.gotoTrack(0);
-	}
-	else if (that.mgr.sources[index()].getPosition() > 0)
-	{
-		// jump to start of track if we're not there
-		that.gotoTrack(index());
-	}
-	else if (index() > 0)
-	{
-		that.gotoTrack(index() - 1);
-		runCallback(that.onprev);
-	}
-	else if (that.loop)
-	{
-		that.gotoTrack(numTracks() - 1);
-		runCallback(that.onprev);
-	}
+	that.gotoTrack(0);
 };
 
 this.next = function (e) {
 	if (that.mgr.sources.length == 0) return;
 	var bForcePlay = (e == true);
+	that.gotoTrack(1,bForcePlay);
+	/*
 	if (index() < numTracks() - 1)
 	{
 		that.gotoTrack(index() + 1, bForcePlay);
@@ -1325,6 +1307,7 @@ this.next = function (e) {
 		that.gotoTrack(0, bForcePlay);
 		runCallback(that.onnext);
 	}
+	*/
 };
 
 this.play = function (e) {
@@ -1535,7 +1518,6 @@ var Init = function(elem_id, options, tickMS) {
 	player_html += '<button class="g5button g5play" id="play' + that.id + '"/>';
 	player_html += '<button class="g5button g5stop" id="stop' + that.id + '"/>';
 	player_html += '<button class="g5button g5shuffle" id="shuffle' + that.id + '"/>';
-	player_html += '<button class="g5button g5next" id="next' + that.id + '"/>';
 
 	if (isMobileBrowser)
 	{
@@ -1566,7 +1548,6 @@ var Init = function(elem_id, options, tickMS) {
 	$('#play' + that.id)[0].addEventListener("mousedown", GAPLESS5_PLAYERS[that.id].playpause);
 	$('#stop' + that.id)[0].addEventListener("mousedown", GAPLESS5_PLAYERS[that.id].stop);
 	$('#shuffle' + that.id)[0].addEventListener("mousedown", GAPLESS5_PLAYERS[that.id].shuffleToggle);
-	$('#next' + that.id)[0].addEventListener("mousedown", GAPLESS5_PLAYERS[that.id].next);
 
 	// set up key mappings
 	if (options != null && 'mapKeys' in options)
